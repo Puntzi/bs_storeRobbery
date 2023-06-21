@@ -14,7 +14,7 @@ RegisterNetEvent('bs_storeRobbery:giveItems', function(name)
     if not Player then return end
 
     if name == "cashRegister" then
-        Player.Functions.AddItem(Config.Items[name].type, Config.Items[name].amount)
+        Player.Functions.AddMoney(Config.Items[name].type, Config.Items[name].amount)
         return
     end
 
@@ -26,6 +26,6 @@ RegisterNetEvent('bs_storeRobbery:giveItems', function(name)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[randomItem], "add", amount)
 end)
 
-lib.register.callback('bs_storeRobbery:checkIsRobbed', function(source, name)
-    return alreadyRobbed[atm] == true
+lib.callback.register('bs_storeRobbery:checkIsRobbed', function(source, name)
+    return cooldownRobbed[name] == true
 end)
